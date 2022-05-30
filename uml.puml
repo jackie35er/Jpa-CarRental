@@ -1,0 +1,32 @@
+@startuml
+scale 1.3
+'left to right direction
+!theme cerulean-outline
+
+
+skinparam backgroundcolor white
+
+'https://plantuml.com/class-diagram
+class Rental {
+    Long id
+    Double drivenKm
+    LocalDateTime beginning
+    LocalDateTime end
+}
+
+class Car {
+    String plate
+    double mileage
+    String model
+}
+
+class Station {
+    Long id
+    String title
+}
+
+Car "1" -- "*" Rental
+Car "*" --  "1" Station
+Rental "*" -- "1" Station :"rental"
+Rental "*" -down- "0, 1" Station : "return"
+@enduml
