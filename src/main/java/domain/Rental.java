@@ -3,10 +3,7 @@ package domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 
@@ -16,13 +13,11 @@ import java.util.Objects;
 
 @Builder
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rental {
-
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

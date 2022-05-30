@@ -29,6 +29,8 @@ public class JpaService implements Service {
 
     @Override
     public Rental save(Rental rental) {
+        if (jpaRentalRepository.checkIfCarIsAvaliable(rental.getCar(),rental.getBeginning(),rental.getEnd()))
+            throw new IllegalArgumentException();
         return jpaGenericRepository.safe(rental);
     }
 
@@ -59,16 +61,16 @@ public class JpaService implements Service {
 
     @Override
     public Optional<Rental> findRentalById(long id) {
-        return Optional.empty();
+        return jpaGenericRepository.findByID(id,Rental.class);
     }
 
     @Override
     public Set<Car> findCarsStationedAt(Station station) {
-        return null;
+        return new HashSet<>(jpaCarRepository.getCarsAtStation(station));
     }
 
     @Override
     public Rental finish(Rental rental, Station station, double drivenKm) {
-        return null;
+        return jpaRentalRepository.finish(rental,station,drivenKm);
     }
 }

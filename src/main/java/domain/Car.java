@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Car {
 
@@ -38,7 +40,7 @@ public class Car {
         return getClass().hashCode();
     }
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne
     private Station location;
 
 

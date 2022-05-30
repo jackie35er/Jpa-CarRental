@@ -4,6 +4,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class JPAGenericRepository {
 
@@ -45,6 +46,16 @@ public class JPAGenericRepository {
                     """.formatted(tClass.getSimpleName());
             var query = entityManager.createQuery(jpql,tClass);
             return query.getResultList();
+        }
+        finally {
+            entityManager.close();
+        }
+    }
+
+    public <K,T> Optional<T> findByID(K key, Class<T> tClass){
+        var entityManager = entityManagerFactory.createEntityManager();
+        try{
+            return Optional.ofNullable(entityManager.find(tClass,key));
         }
         finally {
             entityManager.close();
